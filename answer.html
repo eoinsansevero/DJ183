@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    {% if (guess == correct) %}
+    <div class="response">
+      <h1 class="answer" style="color:darkgreen; text-align: center;">Correct!</h1>
+      <img src="http://www.reactiongifs.com/r/rtr.gif" alt="RaiseRoof">
+    </div>
+    {% else %}
+
+    <div class="response">
+      <h1 class="answer" style="color:red; text-align: center;">Incorrect!</h1>
+      <img src="https://i.pinimg.com/originals/15/6c/1e/156c1ecde9df4206d73a2d88f010fa09.gif" alt="FacePalm">
+    </div>
+
+    {% endif %}
+
+    <p>The answer is: <b>'{{correct_title}}' by {{correct_artist}}</b></p> <br>
+
+    <div class="response">
+      <iframe width="420" height="315" src={{video}}></iframe><br>
+
+      <a class="otherlinks" href='/question?genre={{genre}}&username={{username}}'>Try again?</a><br>
+      <a class="otherlinks" href='/'>Change genre</a>
+    </div>
+
+    {% if attempts == '0' %}
+    <p>Current Score: N/A</p>
+    {% else %}
+    <p>Current Score: {{score}}/{{attempts}}</p>
+    {% endif %}
+    <div class="clearbutt">
+      <a href='/clear'>
+        <button type="button">Clear Score</button>
+      </a>
+    </div>
+
+    <div class="response">
+      <h1>LEADERBOARD</h1>
+      <ol>
+        {% for player in leaderboard%}
+        <li style="border: solid black;">{{player}}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <p>Enjoyed the Game?
+      Click the button below to share on Twitter or Facebook!
+      <div class="fb-share-button" data-href="https://dj4049.herokuapp.com/" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdj4049.herokuapp.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div><br>
+      <a href="https://twitter.com/share?url=https://dj4049.herokuapp.com/" class="twitter-share-button" data-show-count="false" data-size="large">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </p>
+
+    <div class="response">
+      <img src="https://media1.tenor.com/images/fada43a39f5cee7e9b21d309c52ca932/tenor.gif" alt="fingerguns">
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Would you like to clear your score?</h2>
+
+    <form action="/" method="POST">
+      <input type="radio" name="desicion" value=yes>Yes<br>
+      <input type="radio" name="desicion" value=no>No<br>
+      <input type="submit" value="Submit">
+    </form>
+
+
+    {% if attempts == '0' %}
+    <p>Current Score: N/A</p>
+    {% else %}
+    <p>Current Score: {{score}}/{{attempts}}</p>
+    {% endif %}
+    <a href='/clear'>
+      <button type="button">Clear Score</button>
+    </a>
+
+{% endblock %}

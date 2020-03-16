@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if genre == "hot-holiday-songs" %}
+    <div style="text-align: center;">
+      <img src="https://66.media.tumblr.com/f53517422fd2e3e916b7dd0b9024c134/tumblr_ng6stvfoWW1rbgu1so1_500.gif" alt="xmas">
+    </div>
+    {% elif genre == "rap-song" %}
+    <div style="text-align: center;">
+      <img src="https://media.giphy.com/media/B8laVxoaaUyCA/giphy.gif" alt="rap">
+    </div>
+    {% elif genre == "dance-club-play-songs" %}
+    <div style="text-align: center;">
+      <img src="https://i.makeagif.com/media/10-03-2015/cijJ5F.gif" alt="dance">
+    </div>
+    {% elif genre == "hot-100" %}
+    <div style="text-align: center;">
+      <img src="https://media1.tenor.com/images/b729eae51814acb5cad3ac3b8744a07a/tenor.gif" alt="pop">
+    </div>
+    {% elif genre == "greatest-country-songs" %}
+    <div style="text-align: center;">
+      <img src="https://thumbs.gfycat.com/AnotherConcreteBadger-size_restricted.gif" alt="country">
+    </div>
+    {% endif %}
+
+    <div style="margin: 0 auto; display: table;">
+      <audio controls>
+        <source src={{preview.url}} type="audio/mpeg">
+      </audio>
+    </div>
+    <form action="/answer" method="post">
+      {% for song in songs %}
+      <input type="radio" name="guess" value={{song.index}} id="options">'{{song.song.title}}' by {{song.song.artist}}<br>
+      {% endfor %}
+      <input type="submit" value="Submit">
+    </form>
+    {% if attempts == '0' %}
+    <p>Current Score: N/A</p>
+    {% else %}
+    <p>Current Score: {{score}}/{{attempts}}</p>
+    {% endif %}
+    <div class="clearbutt">
+      <a href='/clear'>
+        <button type="button">Clear Score</button>
+      </a>
+    </div>
+
+{% endblock %}

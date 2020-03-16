@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Choose a genre:</h2>
+    <!--TODO-->
+    <form action="/question" target="_self" method="get">
+      <!--Creates a dropdown menu with 5 options from which the user can choose. It will contain 5 music genres-->
+      <select name="genre">
+      {% for genre in genres %}
+        <option value={{genre.chart_title}}>{{genre.genre}}</option>
+      {% endfor %}
+      </select><br>
+      Enter a name...<input type="text" name="username">
+      <input type="submit" value="Submit">
+    </form>
+    {% if attempts == '0' %}
+    <p>Current Score: N/A</p>
+    {% else %}
+    <p>Current Score: {{score}}/{{attempts}}</p>
+    {% endif %}
+
+    <div class="clearbutt">
+      <a href='/clear'>
+        <button type="button">Clear Score</button>
+      </a>
+    </div>
+
+{% endblock %}
